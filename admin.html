@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Verification Management</title>
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+    <div class="admin-container">
+        <h1>🔧 Verification Admin Panel</h1>
+        
+        <div class="admin-stats">
+            <div class="stat-card">
+                <h3>📊 Total Pending</h3>
+                <div class="stat-value" id="totalPending">0</div>
+            </div>
+            <div class="stat-card">
+                <h3>✅ Verified Today</h3>
+                <div class="stat-value" id="verifiedToday">0</div>
+            </div>
+            <div class="stat-card">
+                <h3>❌ Rejected Today</h3>
+                <div class="stat-value" id="rejectedToday">0</div>
+            </div>
+        </div>
+        
+        <div class="verification-list" id="pendingList">
+            <h2>⏳ Pending Verifications</h2>
+            <div class="list-container">
+                <!-- Verifications will be loaded here -->
+            </div>
+        </div>
+        
+        <div class="verification-modal" id="reviewModal" style="display: none;">
+            <div class="modal-content">
+                <h2>Review Verification</h2>
+                
+                <div class="verification-details">
+                    <p><strong>Verification ID:</strong> <span id="reviewId"></span></p>
+                    <p><strong>User Address:</strong> <span id="reviewUser"></span></p>
+                    <p><strong>Task:</strong> <span id="reviewTask"></span></p>
+                    <p><strong>Submitted:</strong> <span id="reviewTime"></span></p>
+                </div>
+                
+                <div class="screenshot-container">
+                    <h3>Screenshot:</h3>
+                    <img id="reviewImage" class="screenshot-image">
+                </div>
+                
+                <div class="action-buttons">
+                    <button class="btn approve-btn" onclick="approveVerification()">
+                        ✅ Approve
+                    </button>
+                    <button class="btn reject-btn" onclick="rejectVerification()">
+                        ❌ Reject
+                    </button>
+                    <button class="btn cancel-btn" onclick="closeReviewModal()">
+                        Cancel
+                    </button>
+                </div>
+                
+                <div class="notes-section">
+                    <label for="reviewNotes">Notes:</label>
+                    <textarea id="reviewNotes" rows="3" 
+                              placeholder="Add notes for review..."></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="js/admin.js"></script>
+</body>
+</html>
