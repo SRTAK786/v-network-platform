@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>V Network - Registration</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <img src="images/logo.png" alt="V Network Logo" class="logo">
+        <button class="wallet-connect-btn" id="connectWalletBtn">
+            Connect Wallet
+        </button>
+    </nav>
+
+    <div class="container">
+        <!-- Step 1: Connect Wallet -->
+        <section id="walletSection" class="card">
+            <h2>🚀 Welcome to V Network</h2>
+            <p>Connect your wallet to get started</p>
+            <button class="btn" id="connectBtnMain">Connect Wallet</button>
+        </section>
+
+        <!-- Step 2: Registration -->
+        <section id="registrationSection" class="card" style="display: none;">
+            <h2>📝 Complete Registration</h2>
+            
+            <!-- Auto-detected Referral -->
+            <div class="form-group">
+                <label>🎯 Referral Address (Auto-detected)</label>
+                <input type="text" id="referralAddress" readonly class="form-input">
+                <small>This was automatically detected from your referral link</small>
+            </div>
+
+            <!-- USDT Approval -->
+            <div class="task-card" id="usdtApprovalCard">
+                <div class="task-header">
+                    <span class="task-number">1</span>
+                    <h3>Approve USDT</h3>
+                </div>
+                <p>Approve $0.30 USDT for registration fee</p>
+                <button class="btn task-btn" id="approveUsdtBtn">
+                    Approve USDT
+                </button>
+                <div class="status-badge pending" id="usdtApprovalStatus">
+                    Pending
+                </div>
+            </div>
+
+            <!-- Registration Payment -->
+            <div class="task-card" id="registrationCard" style="display: none;">
+                <div class="task-header">
+                    <span class="task-number">2</span>
+                    <h3>Pay Registration Fee</h3>
+                </div>
+                <p>Pay $0.30 USDT to activate your account</p>
+                <button class="btn task-btn" id="registerBtn">
+                    Pay $0.30 & Register
+                </button>
+                <div class="status-badge pending" id="registrationStatus">
+                    Pending
+                </div>
+            </div>
+
+            <!-- Social Media Tasks -->
+            <div id="socialTasksSection" style="display: none;">
+                <h2>📱 Social Media Tasks</h2>
+                <p class="subtitle">Complete these tasks to earn rewards</p>
+
+                <!-- Twitter Task -->
+                <div class="task-card social-task">
+                    <div class="task-header">
+                        <span class="task-icon">🐦</span>
+                        <h3>Follow on Twitter (X)</h3>
+                    </div>
+                    <p>Follow our Twitter page @VNetworkOfficial</p>
+                    
+                    <div class="task-actions">
+                        <a href="https://twitter.com/VNetworkOfficial" 
+                           target="_blank" 
+                           class="btn social-btn">
+                            Visit Twitter
+                        </a>
+                        <button class="btn verify-btn" 
+                                onclick="openVerificationModal('twitter')">
+                            Upload Proof
+                        </button>
+                    </div>
+                    
+                    <div class="task-status">
+                        <span class="status pending" id="twitterStatus">
+                            ⏳ Pending Verification
+                        </span>
+                        <small class="hint">Upload screenshot after following</small>
+                    </div>
+                </div>
+
+                <!-- Facebook Task -->
+                <div class="task-card social-task">
+                    <div class="task-header">
+                        <span class="task-icon">📘</span>
+                        <h3>Like Facebook Page</h3>
+                    </div>
+                    <p>Like and follow our Facebook page</p>
+                    
+                    <div class="task-actions">
+                        <a href="https://facebook.com/VNetworkOfficial" 
+                           target="_blank" 
+                           class="btn social-btn">
+                            Visit Facebook
+                        </a>
+                        <button class="btn verify-btn" 
+                                onclick="openVerificationModal('facebook')">
+                            Upload Proof
+                        </button>
+                    </div>
+                    
+                    <div class="task-status">
+                        <span class="status pending" id="facebookStatus">
+                            ⏳ Pending Verification
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Instagram Task -->
+                <div class="task-card social-task">
+                    <div class="task-header">
+                        <span class="task-icon">📸</span>
+                        <h3>Follow Instagram</h3>
+                    </div>
+                    <p>Follow our Instagram account</p>
+                    
+                    <div class="task-actions">
+                        <a href="https://instagram.com/VNetworkOfficial" 
+                           target="_blank" 
+                           class="btn social-btn">
+                            Visit Instagram
+                        </a>
+                        <button class="btn verify-btn" 
+                                onclick="openVerificationModal('instagram')">
+                            Upload Proof
+                        </button>
+                    </div>
+                    
+                    <div class="task-status">
+                        <span class="status pending" id="instagramStatus">
+                            ⏳ Pending Verification
+                        </span>
+                    </div>
+                </div>
+
+                <!-- YouTube Task -->
+                <div class="task-card social-task">
+                    <div class="task-header">
+                        <span class="task-icon">📺</span>
+                        <h3>Subscribe YouTube</h3>
+                    </div>
+                    <p>Subscribe to our YouTube channel</p>
+                    
+                    <div class="task-actions">
+                        <a href="https://youtube.com/@VNetworkOfficial" 
+                           target="_blank" 
+                           class="btn social-btn">
+                            Visit YouTube
+                        </a>
+                        <button class="btn verify-btn" 
+                                onclick="openVerificationModal('youtube')">
+                            Upload Proof
+                        </button>
+                    </div>
+                    
+                    <div class="task-status">
+                        <span class="status pending" id="youtubeStatus">
+                            ⏳ Pending Verification
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Telegram Task -->
+                <div class="task-card social-task">
+                    <div class="task-header">
+                        <span class="task-icon">📢</span>
+                        <h3>Join Telegram</h3>
+                    </div>
+                    <p>Join our Telegram channel</p>
+                    
+                    <div class="task-actions">
+                        <a href="https://t.me/VNetworkOfficial" 
+                           target="_blank" 
+                           class="btn social-btn">
+                            Join Telegram
+                        </a>
+                        <button class="btn verify-btn" 
+                                onclick="openVerificationModal('telegram')">
+                            Upload Proof
+                        </button>
+                    </div>
+                    
+                    <div class="task-status">
+                        <span class="status pending" id="telegramStatus">
+                            ⏳ Pending Verification
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Daily Tasks -->
+            <div id="dailyTasksSection" style="display: none;">
+                <h2>⭐ Daily Tasks</h2>
+                
+                <div class="task-card daily-task">
+                    <div class="task-header">
+                        <span class="task-icon">🎁</span>
+                        <h3>Daily Reward Claim</h3>
+                    </div>
+                    <p>Claim your daily 100 VNTT tokens</p>
+                    
+                    <button class="btn claim-btn" id="dailyClaimBtn">
+                        Claim Daily Reward
+                    </button>
+                    
+                    <div class="timer" id="dailyTimer">
+                        ⏰ Next claim in: <span>24:00:00</span>
+                    </div>
+                    
+                    <div class="reward-info">
+                        <span class="reward-amount">100 VNTT</span>
+                        <span class="reward-duration">Daily</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Referral Section -->
+            <div id="referralSection" style="display: none;">
+                <h2>👥 Invite & Earn</h2>
+                
+                <div class="referral-card">
+                    <h3>Your Unique Referral Link</h3>
+                    
+                    <div class="referral-link-container">
+                        <input type="text" 
+                               id="referralLink" 
+                               readonly 
+                               class="referral-input">
+                        <button class="btn copy-btn" onclick="copyReferralLink()">
+                            📋 Copy
+                        </button>
+                    </div>
+                    
+                    <div class="referral-stats-grid">
+                        <div class="stat-box">
+                            <div class="stat-label">Total Referrals</div>
+                            <div class="stat-value" id="totalReferrals">0</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-label">Total Earned</div>
+                            <div class="stat-value" id="referralEarnings">
+                                0 VNTT
+                            </div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-label">Pending Rewards</div>
+                            <div class="stat-value" id="pendingRewards">
+                                0 VNTT
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="referral-note">
+                        <p>💡 <strong>Note:</strong> Earn 100 VNTT for each referral who registers</p>
+                        <p>Share your link on social media to earn more!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Verification Modal -->
+    <div id="verificationModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            
+            <h2 id="modalTitle">Upload Verification Proof</h2>
+            
+            <div class="verification-instructions">
+                <h3>📸 Instructions:</h3>
+                <ol>
+                    <li>Complete the task on social media</li>
+                    <li>Take a clear screenshot showing:</li>
+                    <ul>
+                        <li>Your profile/account</li>
+                        <li>Our page/channel followed</li>
+                        <li>Follow/Subscribe button showing "Following"</li>
+                    </ul>
+                    <li>Upload the screenshot below</li>
+                </ol>
+            </div>
+            
+            <div class="upload-area" id="dropArea">
+                <input type="file" 
+                       id="screenshotUpload" 
+                       accept="image/*" 
+                       style="display: none;">
+                
+                <div class="upload-placeholder">
+                    <span class="upload-icon">📁</span>
+                    <p>Drag & drop screenshot here</p>
+                    <p class="upload-hint">or click to browse</p>
+                    <p class="file-types">JPG, PNG, GIF (Max 5MB)</p>
+                </div>
+                
+                <div class="preview-container" id="previewContainer" 
+                     style="display: none;">
+                    <img id="imagePreview" class="preview-image">
+                    <button type="button" class="btn remove-btn" 
+                            onclick="removeImage()">
+                        Remove
+                    </button>
+                </div>
+            </div>
+            
+            <div class="modal-actions">
+                <button class="btn cancel-btn" onclick="closeModal()">
+                    Cancel
+                </button>
+                <button class="btn submit-btn" id="submitVerification" 
+                        onclick="submitVerification()" disabled>
+                    Submit for Verification
+                </button>
+            </div>
+            
+            <div class="verification-note">
+                <p>✅ Verification will be completed within 24 hours by our team</p>
+                <p>📧 You will receive a notification once verified</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+    <script src="js/web3-config.js"></script>
+    <script src="js/contract-interaction.js"></script>
+    <script src="js/tasks.js"></script>
+    <script src="js/referral.js"></script>
+</body>
+</html>
